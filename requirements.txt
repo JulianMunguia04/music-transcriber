@@ -1,0 +1,9 @@
+tensorflow>=2.14
+librosa
+pretty_midi
+music21
+numpy
+pandas
+matplotlib
+tqdm
+python-dotenv

@@ -3,7 +3,7 @@
 import librosa
 import numpy as np
 from pathlib import Path
-import config
+from src import config
 import pretty_midi
 
 HOP_LENGTH = 512

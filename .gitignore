@@ -1,0 +1,35 @@
+# ========================
+# Python / Environment
+# ========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+.env
+.venv/
+venv/
+.env/
+*.swp
+.DS_Store
+
+# ========================
+# Logs / Outputs
+# ========================
+logs/
+*.log
+*.out
+*.err
+
+# ========================
+# Jupyter / Checkpoints
+# ========================
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+# ========================
+# Data / Datasets
+# ========================
+data/maestro/
+data/processed/
+data/outputs/

@@ -11,7 +11,7 @@ def main():
         print("No MIDI files found. Check your MAESTRO_PATH in .env.")
         return
 
-    for midi_file in midi_files[:1]:  # just pick the first one for testing
+    for midi_file in midi_files[1:2]:  # just pick the first one for testing
         audio_file = midi_file.with_suffix(".wav")
         print("Found MIDI:", midi_file)
         print("Corresponding audio exists?", audio_file.exists())

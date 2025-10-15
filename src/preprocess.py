@@ -23,7 +23,7 @@ def audio_to_mel(wav_path):
     S_norm = (S_db + 80.0) / 80.0
     return S_norm.T.astype(np.float32)  # shape: (time_frames, n_mels)
 
-def midi_to_events(midi_path):
+def midi_to_event_sequence(midi_path):
     pm = pretty_midi.PrettyMIDI(str(midi_path))
     events = []
     for inst in pm.instruments:
@@ -45,6 +45,18 @@ def events_to_tokens(events):
         prev_onset = onset
     return tokens
 
+def build_example(wav_path, midi_path):
+    """
+    Converts WAV + MIDI paths into:
+    X = mel-spectrogram (numpy array)
+    tokens = list of token strings for decoder
+    """
+    X = audio_to_mel(wav_path)
+    events = midi_to_event_sequence(midi_path)
+    tokens = events_to_tokens(events)
+    return X, tokens
+
+
 def main():
     maestro_folder = Path(config.MAESTRO_PATH)
     
@@ -57,7 +69,7 @@ def main():
     print("Mel-spectrogram shape:", mel.shape)
 
     midi_file = Path(config.MAESTRO_PATH) / "2018/MUS-2018_01/song1.midi"
-    events = midi_to_events(midi_file)
+    events = midi_to_event_sequence(midi_file)
     tokens = events_to_tokens(events)
     for token in tokens:
         print(token)

@@ -8,6 +8,7 @@ load_dotenv()
 
 # Paths
 MAESTRO_PATH = os.getenv("MAESTRO_PATH")
+MAESTRO_PATH_FULL = os.getenv("MAESTRO_PATH_FULL")
 MUSESCORE_PATH = os.getenv("MUSESCORE_PATH")
 OUTPUT_PATH = os.getenv("OUTPUT_PATH")
 

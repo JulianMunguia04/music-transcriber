@@ -1,13 +1,78 @@
-# Convert wav into numerical representation
-
 import librosa
 import numpy as np
 from pathlib import Path
 from src import config
 import pretty_midi
+import music21
+from music21 import note, chord, stream, tempo, duration
 
 HOP_LENGTH = 512
 N_FFT = 2048
+
+def tokens_to_events(tokens):
+    """Convert tokens back to event sequence"""
+    events = []
+    for token in tokens:
+        if token.startswith('P_'):
+            events.append(('NOTE_ON', int(token[2:])))
+        elif token.startswith('DT_'):
+            events.append(('TIME_SHIFT', int(token[3:]) / 1000.0))  # Convert back to seconds
+        elif token.startswith('DU_'):
+            events.append(('DURATION', int(token[3:]) / 1000.0))  # Convert back to seconds
+    return events
+
+def events_to_midi(events, output_path, tempo_bpm=120):
+    """Convert events back to MIDI file"""
+    # Create a music21 stream
+    s = stream.Stream()
+    s.insert(0, tempo.MetronomeMark(number=tempo_bpm))
+    
+    current_time = 0.0
+    active_notes = {}  # pitch -> (start_time, duration)
+    
+    for event_type, value in events:
+        if event_type == 'NOTE_ON':
+            # Start a new note
+            active_notes[value] = (current_time, None)
+            
+        elif event_type == 'DURATION':
+            # Update the duration for the most recent note
+            if active_notes:
+                # Get the most recently started note
+                latest_pitch = list(active_notes.keys())[-1]
+                start_time, _ = active_notes[latest_pitch]
+                active_notes[latest_pitch] = (start_time, value)
+                
+        elif event_type == 'TIME_SHIFT':
+            # Finalize notes that end during this time shift
+            notes_to_remove = []
+            for pitch, (start_time, note_duration) in active_notes.items():
+                if note_duration is not None and start_time + note_duration <= current_time + value:
+                    # Note ends during this time shift, create the note
+                    n = note.Note(pitch)
+                    n.offset = start_time
+                    n.duration = duration.Duration(note_duration)
+                    s.insert(start_time, n)
+                    notes_to_remove.append(pitch)
+            
+            # Remove finalized notes
+            for pitch in notes_to_remove:
+                del active_notes[pitch]
+            
+            current_time += value
+    
+    # Finalize any remaining notes
+    for pitch, (start_time, note_duration) in active_notes.items():
+        if note_duration is not None:
+            n = note.Note(pitch)
+            n.offset = start_time
+            n.duration = duration.Duration(note_duration)
+            s.insert(start_time, n)
+    
+    # Save to MIDI file
+    s.write('midi', fp=output_path)
+    print(f"MIDI file saved: {output_path}")
+    return s
 
 def audio_to_mel(wav_path):
     y, sr = librosa.load(wav_path, sr=config.SAMPLE_RATE)

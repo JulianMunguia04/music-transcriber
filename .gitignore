@@ -31,5 +31,19 @@ notebooks/.ipynb_checkpoints/
 # Data / Datasets
 # ========================
 data/maestro/
+data/maestro-v3.0.0
 data/processed/
 data/outputs/
+data/maestro-example
+
+# Large audio / MIDI files
+*.wav
+*.mp3
+*.flac
+*.midi
+*.mid
+*.zip
+*.tar.gz
+*.npy
+*.npz
+*.pkl

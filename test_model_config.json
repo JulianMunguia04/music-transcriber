@@ -1,0 +1,22 @@
+{
+  "vocab_size": 2008,
+  "d_model": 64,
+  "num_heads": 2,
+  "ff_dim": 128,
+  "enc_layers": 2,
+  "dec_layers": 2,
+  "enc_max_len": 2048,
+  "dec_max_len": 256,
+  "vocab_sample": [
+    "<PAD>",
+    "<BOS>",
+    "<EOS>",
+    "<UNK>",
+    "P_74",
+    "P_69",
+    "P_76",
+    "P_72",
+    "P_67",
+    "P_79"
+  ]
+}

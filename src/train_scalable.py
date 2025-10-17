@@ -27,7 +27,7 @@ def setup_training():
         },
         'medium': {
             'subset': 0.1,    # 10% of data ~ 10GB
-            'batch_size': 16, 
+            'batch_size': 8, # 8 if too much 
             'epochs': 25,
             'model_size': 'medium'
         },
@@ -52,7 +52,7 @@ def setup_training():
     }
     
     # CHOOSE YOUR SCALE:
-    scale = 'small'  # Start with small!
+    scale = 'medium'  # Change to small medium large or full
     
     config = SCALE_CONFIGS[scale]
     model_config = MODEL_SIZES[config['model_size']]
@@ -159,3 +159,5 @@ def train_scalable():
 
 if __name__ == "__main__":
     train_scalable()
+
+#python -m src.train_scalable to train

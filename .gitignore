@@ -47,3 +47,4 @@ data/maestro-example
 *.npy
 *.npz
 *.pkl
+*.h5

@@ -5,34 +5,24 @@ Follow the instructions below to set up your environment and project structure.
 
 ---
 
-Folder Structure
+### Folder Structure
 
+```
 project_root/
-
 │
-
 ├── data/
-
-│   └── maestro-v3.0.0/           # Place the extracted MAESTRO dataset here
+│   └── maestro-v3.0.0/  # Place the extracted MAESTRO dataset here
 │
-
-├── notebooks/                    # Jupyter notebooks for analysis
-
+├── notebooks/           # Jupyter notebooks for analysis
 │
-
-├── src/                          # Source code (models, utilities, etc.)
-
+├── src/                 # Source code (models, utilities, etc.)
 │
-
-├── .env                          # Environment variables (see below)
-
+├── .env                 # Environment variables (see below)
 │
-
-├── requirements.txt              # Python dependencies
-
+├── requirements.txt     # Python dependencies
 │
-
 └── README.md
+```
 
 ---
 
@@ -80,3 +70,4 @@ Notes
 - MAESTRO provides aligned audio + MIDI pairs — no manual synchronization needed.  
 - The model learns to predict sequences of notes (pitch, onset, duration) and reconstructs them as MusicXML.  
 - MuseScore is used for converting and visualizing MusicXML output.
+

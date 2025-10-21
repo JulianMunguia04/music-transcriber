@@ -118,6 +118,7 @@ python wav_to_midi.py input.wav \
   --max-length 1000 \
   --temperature 0.8
 ```
+> Change scalable_model_medium.weights.h5 from `medium` to `small`, `large`, `full`.
 
 ### Arguments
 * `--output, -o`: Output MIDI file path
@@ -190,6 +191,3 @@ Potential enhancements for this project:
 - **Real-time Processing**: Implement live audio input and real-time transcription
 - **Multi-instrument Support**: Extend beyond piano to recognize various instruments
 - **Web Interface**: Create a browser-based version with drag-and-drop functionality
-
-
-

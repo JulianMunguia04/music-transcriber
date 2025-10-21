@@ -33,7 +33,7 @@ def setup_training():
         },
         'large': {
             'subset': 0.5,    # 50% of data ~ 50GB
-            'batch_size': 16,
+            'batch_size': 4,
             'epochs': 50, 
             'model_size': 'large'
         },
@@ -52,7 +52,7 @@ def setup_training():
     }
     
     # CHOOSE YOUR SCALE:
-    scale = 'medium'  # Change to small medium large or full
+    scale = 'large'  # Change to small medium large or full
     
     config = SCALE_CONFIGS[scale]
     model_config = MODEL_SIZES[config['model_size']]

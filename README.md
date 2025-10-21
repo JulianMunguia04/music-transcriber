@@ -4,6 +4,19 @@ A scalable transformer-based deep learning model that converts WAV audio files i
 
 ---
 
+## 🧰 Tech Stack
+
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white&style=for-the-badge)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?logo=tensorflow&logoColor=white&style=for-the-badge)
+![Keras](https://img.shields.io/badge/Keras-D00000?logo=keras&logoColor=white&style=for-the-badge)
+![NumPy](https://img.shields.io/badge/NumPy-013243?logo=numpy&logoColor=white&style=for-the-badge)
+![LibROSA](https://img.shields.io/badge/LibROSA-0B99B7?logo=librosa&logoColor=white&style=for-the-badge)
+![MIDI](https://img.shields.io/badge/MIDI-000000?logo=midi&logoColor=white&style=for-the-badge)
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white&style=for-the-badge)
+![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white&style=for-the-badge)
+
+---
+
 ## Local Setup 🛠️
 
 ### 1. Clone the repository
@@ -177,5 +190,6 @@ Potential enhancements for this project:
 - **Real-time Processing**: Implement live audio input and real-time transcription
 - **Multi-instrument Support**: Extend beyond piano to recognize various instruments
 - **Web Interface**: Create a browser-based version with drag-and-drop functionality
+
 
 

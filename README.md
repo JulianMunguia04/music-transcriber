@@ -63,8 +63,6 @@ project_root/
 └── README.md
 ```
 
----
-
 ## Training the Model 🚀 
 
 ### Start with small scale (Recommended)
@@ -114,6 +112,8 @@ python wav_to_midi.py input.wav \
 * `--max-length, -l`: Maximum sequence length (default: 1000)
 * `--temperature, -t`: Sampling temperature (default: 0.8)
 
+---
+
 ## Troubleshooting 🔧
 
 ### Out of Memory Erros
@@ -131,3 +131,51 @@ python wav_to_midi.py input.wav \
 ## 🙏 Acknowledgments
 * MAESTRO Dataset by Magenta Team
 * TensorFlow and Keras teams
+
+---
+## Model Architecture 🏗️
+
+The system uses an encoder-decoder transformer with the following components:
+
+### Encoder
+- **Input**: Mel-spectrogram (batch, time, 80)
+- **Audio Frontend**: CNN layers (128→256→d_model channels) with batch normalization
+- **Position Encoding**: Learnable embeddings instead of fixed sinusoidal
+- **Transformer Layers**: Multiple encoder blocks with self-attention and feed-forward networks
+
+### Decoder  
+- **Input**: Token sequences (batch, seq_len)
+- **Embedding**: Token embeddings projected to d_model dimensions
+- **Causal Masking**: Prevents attending to future tokens during training
+- **Transformer Layers**: Decoder blocks with self-attention, cross-attention to encoder, and feed-forward networks
+
+### Scalable Configuration
+```python
+# Model sizes available
+SMALL  = {'d_model': 256, 'num_heads': 4, 'ff_dim': 1024, 'enc_layers': 4, 'dec_layers': 4}
+MEDIUM = {'d_model': 512, 'num_heads': 8, 'ff_dim': 2048, 'enc_layers': 6, 'dec_layers': 6}
+LARGE  = {'d_model': 768, 'num_heads': 12, 'ff_dim': 3072, 'enc_layers': 12, 'dec_layers': 12}
+```
+
+### Token Vocabulary
+* Note Events: `P_{pitch}` for MIDI pitches (0-127)
+
+* Time Shifts: `DT_{duration}` for relative timing
+
+* Durations: `DU_{duration}` for note lengths
+
+* Special Tokens: `<BOS>`, `<EOS>`, `<PAD>`
+
+---
+
+## Next Steps
+
+Potential enhancements for this project:
+
+- **User Interface**: Develop a GUI using MuseScore integration for visual score editing
+- **Export Formats**: Add PDF and MusicXML (.mscz) export capabilities
+- **Real-time Processing**: Implement live audio input and real-time transcription
+- **Multi-instrument Support**: Extend beyond piano to recognize various instruments
+- **Web Interface**: Create a browser-based version with drag-and-drop functionality
+
+
